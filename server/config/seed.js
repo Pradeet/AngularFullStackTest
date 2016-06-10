@@ -42,11 +42,13 @@ Thing.find({}).remove()
 User.find({}).remove()
   .then(() => {
     User.create({
+      id: '201301433',
       provider: 'local',
       name: 'Test User',
       email: 'test@example.com',
       password: 'test'
     }, {
+      id: '201301431',
       provider: 'local',
       role: 'admin',
       name: 'Admin',

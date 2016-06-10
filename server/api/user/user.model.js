@@ -3,26 +3,45 @@
 import crypto from 'crypto';
 import mongoose from 'mongoose';
 mongoose.Promise = require('bluebird');
-import {Schema} from 'mongoose';
+import {
+  Schema
+} from 'mongoose';
+
+const authTypes = ['github', 'twitter', 'facebook', 'google'];
+const userRoles = ['Student', 'Officer', 'Comittee', 'Company'];
+const options = {
+  discriminatorKey: 'role'
+};
 
 var UserSchema = new Schema({
+  id: {
+    type: String,
+    required: true
+  },
   name: String,
   email: {
     type: String,
     lowercase: true,
-    required: true
+    default: null
   },
-  role: {
-    type: String,
-    default: 'user'
+  password: String,
+  salt: String,
+  placementDrive: {
+    type: Number,
+    default: 2016
   },
-  password: {
-    type: String,
-    required: true
-  },
-  provider: String,
-  salt: String
-});
+  isActive: {
+    type: Boolean,
+    default: true
+  }
+}, options);
+
+UserSchema.index({
+  id: 1,
+  placementDrive: 1
+}, {
+  unique: true
+})
 
 /**
  * Virtuals
@@ -72,7 +91,9 @@ UserSchema
   .validate(function(value, respond) {
     var self = this;
 
-    return this.constructor.findOne({ email: value }).exec()
+    return this.constructor.findOne({
+        email: value
+      }).exec()
       .then(function(user) {
         if (user) {
           if (self.id === user.id) {
@@ -209,7 +230,7 @@ UserSchema.methods = {
 
     if (!callback) {
       return crypto.pbkdf2Sync(password, salt, defaultIterations, defaultKeyLength)
-                   .toString('base64');
+        .toString('base64');
     }
 
     return crypto.pbkdf2(password, salt, defaultIterations, defaultKeyLength, (err, key) => {
