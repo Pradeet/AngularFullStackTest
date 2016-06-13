@@ -3,7 +3,7 @@
 
 angular.module('angularFullStackTestApp.constants', [])
 
-.constant('appConfig', {userRoles:['guest','user','admin']})
+.constant('appConfig', {userRoles:['guest','user','admin'],currentDrive:2016})
 
 ;
 })(angular);

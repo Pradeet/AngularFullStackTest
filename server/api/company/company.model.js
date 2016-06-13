@@ -40,7 +40,7 @@ var CompanySchema = new mongoose.Schema({
       message: '{VALUE} is not a valid Postal Code!'
     },
     required: true
-  }
+  },
   contactNumber: {
     type: String,
     validate: {

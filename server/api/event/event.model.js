@@ -13,7 +13,7 @@ var EventSchema = new mongoose.Schema({
   },
   placementDrive: {
     type: Number,
-    default: config.currentDrive;
+    default: config.currentDrive
   },
   isActive: {
     type: Boolean,

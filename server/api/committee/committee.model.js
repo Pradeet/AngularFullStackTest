@@ -37,7 +37,6 @@ var CommitteeSchema = new mongoose.Schema({
   },
   toDrive: {
     type: Number,
-    default: this.fromDrive + 1,
     validate: {
       validator: function(value) {
         return value > this.fromDrive;
