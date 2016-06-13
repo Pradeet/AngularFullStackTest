@@ -13,6 +13,8 @@ var CompanySchema = new mongoose.Schema({
     unique: true,
     required: true
   },
+  website: String,
+  companyProfile: String,
   addressLine1: {
     type: String,
     required: true
