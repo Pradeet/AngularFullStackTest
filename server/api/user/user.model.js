@@ -16,15 +16,20 @@ const options = {
 var UserSchema = new Schema({
   id: {
     type: String,
-    required: true
+    required: false,
+    default: null
   },
   name: String,
   email: {
     type: String,
     lowercase: true,
-    default: null
+    default: " "
   },
-  password: String,
+  password:
+  {
+   type: String
+  },
+  // todo : Fix Invaid password error
   salt: String,
   placementDrive: {
     type: Number,
