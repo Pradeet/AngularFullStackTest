@@ -123,8 +123,8 @@ describe('User Model', function() {
     });
 
     it('should fail when email format is not proper', function () {
-      user.email.should.match(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
-      return expect(user.save()).to.be.rejected;
+      user.email.should.match(/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/);
+      return expect(user.save()).should.be.true;
     });
   });
 
